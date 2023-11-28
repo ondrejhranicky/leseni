@@ -6,6 +6,9 @@
     <title>Lešení Kováč</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="path/to/lightbox2/dist/css/lightbox.min.css">
+
+    <!-- Add the jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
     <header>
@@ -37,13 +40,13 @@
         <div class="container">
             <h2>Naše Práce</h2>
             <div class="image-container">
-                <a href="https://github.com/ondrejhranicky/leseni/blob/main/gallery/4s.jpg?raw=true" data-lightbox="gallery" data-title="Project 1"><img src="https://github.com/ondrejhranicky/leseni/blob/main/gallery/4s.jpg?raw=true" alt="Project 1"></a>
-                <a href="https://github.com/ondrejhranicky/leseni/blob/main/gallery/1.jpg?raw=true" data-lightbox="gallery" data-title="Project 2"><img src="https://github.com/ondrejhranicky/leseni/blob/main/gallery/1.jpg?raw=true" alt="Project 2"></a>
-                <a href="https://github.com/ondrejhranicky/leseni/blob/main/gallery/5.jpg?raw=true" data-lightbox="gallery" data-title="Project 3"><img src="https://github.com/ondrejhranicky/leseni/blob/main/gallery/5.jpg?raw=true" alt="Project 3"></a>
+                <a href="https://github.com/ondrejhranicky/leseni/blob/main/gallery/4s.jpg?raw=true" class="lightbox" data-lightbox="gallery" data-title="Project 1"><img src="https://github.com/ondrejhranicky/leseni/blob/main/gallery/4s.jpg?raw=true" alt="Project 1"></a>
+                <a href="https://github.com/ondrejhranicky/leseni/blob/main/gallery/1.jpg?raw=true" class="lightbox" data-lightbox="gallery" data-title="Project 2"><img src="https://github.com/ondrejhranicky/leseni/blob/main/gallery/1.jpg?raw=true" alt="Project 2"></a>
+                <a href="https://github.com/ondrejhranicky/leseni/blob/main/gallery/5.jpg?raw=true" class="lightbox" data-lightbox="gallery" data-title="Project 3"><img src="https://github.com/ondrejhranicky/leseni/blob/main/gallery/5.jpg?raw=true" alt="Project 3"></a>
 
-                 <a href="https://github.com/ondrejhranicky/leseni/blob/main/gallery/6.jpg?raw=true" data-lightbox="gallery" data-title="Project 4"><img src="https://github.com/ondrejhranicky/leseni/blob/main/gallery/6.jpg?raw=true" alt="Project 4"></a>
-                 <a href="https://github.com/ondrejhranicky/leseni/blob/main/gallery/2.jpg?raw=true" data-lightbox="gallery" data-title="Project 5"><img src="https://github.com/ondrejhranicky/leseni/blob/main/gallery/2.jpg?raw=true" alt="Project 5"></a>
-                 <a href="https://github.com/ondrejhranicky/leseni/blob/main/gallery/3.jpg?raw=true" data-lightbox="gallery" data-title="Project 6"><img src="https://github.com/ondrejhranicky/leseni/blob/main/gallery/3.jpg?raw=true" alt="Project 6"></a>
+                <a href="https://github.com/ondrejhranicky/leseni/blob/main/gallery/6.jpg?raw=true" class="lightbox" data-lightbox="gallery" data-title="Project 4"><img src="https://github.com/ondrejhranicky/leseni/blob/main/gallery/6.jpg?raw=true" alt="Project 4"></a>
+                <a href="https://github.com/ondrejhranicky/leseni/blob/main/gallery/2.jpg?raw=true" class="lightbox" data-lightbox="gallery" data-title="Project 5"><img src="https://github.com/ondrejhranicky/leseni/blob/main/gallery/2.jpg?raw=true" alt="Project 5"></a>
+                <a href="https://github.com/ondrejhranicky/leseni/blob/main/gallery/3.jpg?raw=true" class="lightbox" data-lightbox="gallery" data-title="Project 6"><img src="https://github.com/ondrejhranicky/leseni/blob/main/gallery/3.jpg?raw=true" alt="Project 6"></a>
             </div>
         </div>
     </section>
@@ -66,5 +69,59 @@
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="path/to/lightbox2/dist/js/lightbox.min.js"></script>
     <script src="script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            ScrollReveal().reveal('.container', {
+                duration: 1000,
+                easing: 'ease-in-out',
+                origin: 'bottom',
+                distance: '20px',
+                mobile: true
+            });
+
+            ScrollReveal().reveal('.about, .services, .gallery, .contact, footer', {
+                duration: 1000,
+                easing: 'ease-in-out',
+                origin: 'bottom',
+                distance: '20px',
+                mobile: true
+            });
+
+            // Custom Lightbox functionality
+            $(document).on('click', '.lightbox', function (e) {
+                e.preventDefault();
+
+                // Create a new div for the lightbox
+                var lightbox = $('<div>', { id: 'lightbox' });
+
+                // Create the image element and set its source
+                var img = $('<img>', { src: $(this).attr('href') });
+
+                // Create the close button
+                var closeButton = $('<span>', { class: 'close-button', html: '&times;' });
+
+                // Append the image and close button to the lightbox
+                lightbox.append(img, closeButton);
+
+                // Append the lightbox to the body
+                $('body').append(lightbox);
+
+                // Add a click event to close the lightbox when clicking outside the image
+                lightbox.click(function () {
+                    lightbox.fadeOut(300, function () {
+                        lightbox.remove();
+                    });
+                });
+
+                // Add a click event to the close button
+                closeButton.click(function () {
+                    lightbox.fadeOut(300, function () {
+                        lightbox.remove();
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
