@@ -44,13 +44,7 @@ header p {
 section {
     padding: 4em 0;
 }
-.lightbox {
-  background: rgba(0, 0, 0, 0.8);
-}
 
-.lightbox img {
-  max-height: 80vh;
-}
 .about, .services, .gallery, .contact {
     background-color: #fff;
     border-radius: 8px;
